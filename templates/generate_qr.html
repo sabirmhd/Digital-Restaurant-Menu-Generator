@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScanServe - Generate QR Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-qrcode text-3xl mr-3"></i>
+                <h1 class="text-2xl font-bold">ScanServe</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:underline">Home</a></li>
+                    <li><a href="#" class="hover:underline">Features</a></li>
+                    <li><a href="#" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Create Your Digital Menu QR Code</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Craft smart QR codes that connect your restaurant menu with just one scan.</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl card-shadow overflow-hidden">
+            <div class="gradient-bg py-5 px-6 text-white">
+                <h2 class="text-xl font-semibold"><i class="fas fa-plus-circle mr-2"></i>Generate Your QR Code</h2>
+            </div>
+            
+            <div class="p-8">
+                <form action="{% url 'generate_qr' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-8">
+                        <label for="id_restaurant_name" class="block text-sm font-medium text-gray-700 mb-3">
+                            <i class="fas fa-utensils mr-2 text-indigo-600"></i>Restaurant Name
+                        </label>
+                        <input type="text" name="restaurant_name" maxlength="50" required id="id_restaurant_name" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                               placeholder="Enter Restaurant Name">
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="id_url" class="block text-sm font-medium text-gray-700 mb-3">
+                            <i class="fas fa-link mr-2 text-indigo-600"></i>Google Drive Menu URL
+                        </label>
+                        <input type="url" name="url" maxlength="200" required id="id_url" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                               placeholder="Paste your Google Drive link here">
+                        <p class="mt-3 text-sm text-gray-500 bg-blue-50 p-3 rounded-lg">
+                            <i class="fas fa-info-circle mr-1 text-blue-500"></i> 
+                            Make sure your Google Drive file is set to "Anyone with the link can view"
+                        </p>
+                    </div>
+                    
+                    <button type="submit" class="w-full gradient-bg hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-bolt mr-2"></i>Generate QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- How it works section -->
+        <div class="max-w-4xl mx-auto mt-16">
+            <h3 class="text-2xl font-bold text-center mb-10">How It Works</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl card-shadow text-center">
+                    <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white text-xl mb-4 mx-auto">
+                        1
+                    </div>
+                    <h4 class="font-semibold mb-2">Enter Details</h4>
+                    <p class="text-gray-600">Provide your restaurant name and Google Drive link</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow text-center">
+                    <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white text-xl mb-4 mx-auto">
+                        2
+                    </div>
+                    <h4 class="font-semibold mb-2">Generate QR Code</h4>
+                    <p class="text-gray-600">Our system creates a unique QR code for your menu</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow text-center">
+                    <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white text-xl mb-4 mx-auto">
+                        3
+                    </div>
+                    <h4 class="font-semibold mb-2">Share & Display</h4>
+                    <p class="text-gray-600">Print or display the QR code for customers to scan</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">ScanServe</h3>
+                    <p class="text-gray-400">Creating digital solutions for restaurants to showcase their menus safely and conveniently.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Info</h3>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-envelope mr-2"></i> sabirmhd30@gmail.com</p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-phone mr-2"></i> +91 7356041661</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 ScanServe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

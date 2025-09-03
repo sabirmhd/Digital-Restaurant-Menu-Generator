@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScanServe - QR Code Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .qr-border {
+            padding: 16px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 16px;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-qrcode text-3xl mr-3"></i>
+                <h1 class="text-2xl font-bold">ScanServe</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:underline">Home</a></li>
+                    <li><a href="#" class="hover:underline">Features</a></li>
+                    <li><a href="#" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl card-shadow overflow-hidden">
+            <div class="gradient-bg py-5 px-6 text-white">
+                <h2 class="text-xl font-semibold"><i class="fas fa-check-circle mr-2"></i>QR Code Generated Successfully</h2>
+            </div>
+            
+            <div class="p-8 flex flex-col items-center">
+                <h3 class="text-2xl font-bold mb-2 text-center">{{ res_name }}</h3>
+                <p class="text-gray-600 mb-6 text-center">Your digital menu QR code is ready to use</p>
+                
+                <div class="qr-border my-6">
+                    <img src="{{ qr_url }}" alt="QR Code" class="w-64 h-64 bg-white p-2 rounded-lg">
+                </div>
+                
+                <p class="text-gray-600 mb-6 text-center">Scan this QR code to view the digital menu or download it to print for your restaurant.</p>
+                
+                <a href="{{ qr_url }}" download="{{ file_name }}" class="btn-primary text-white font-semibold py-3 px-6 rounded-lg mb-4 inline-flex items-center">
+                    <i class="fas fa-download mr-2"></i> Download QR Code
+                </a>
+
+                <div class="w-full mt-8">
+                    <h4 class="font-semibold mb-3 text-gray-700"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Usage Tips</h4>
+                    <ul class="bg-gray-50 p-4 rounded-lg space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Print and display at restaurant entrance and tables</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Add to your digital marketing materials</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Share on social media to attract customers</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-gray-200 w-full text-center">
+                    <p class="text-sm text-gray-500">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-1"></i> 
+                        Thank you for using ScanServe - Your digital menu solution
+                    </p>
+                    <a href="#" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium">
+                        <i class="fas fa-plus-circle mr-1"></i> Create Another QR Code
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps Section -->
+        <div class="max-w-4xl mx-auto mt-16">
+            <h3 class="text-2xl font-bold text-center mb-10">What to Do Next</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">Print Your QR Code</h4>
+                    <p class="text-gray-600">Download and print high-quality versions of your QR code for display in your restaurant.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">Share Digitally</h4>
+                    <p class="text-gray-600">Add the QR code to your website, social media profiles, and email newsletters.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">ScanServe</h3>
+                    <p class="text-gray-400">Creating digital solutions for restaurants to showcase their menus safely and conveniently.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Info</h3>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-envelope mr-2"></i> sabirmhd30@gmail.com</p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-phone mr-2"></i> +91 7356041661</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 ScanServe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
